@@ -1,6 +1,6 @@
 import pygame, sys, random
 from button import Button
-#from window import window
+from algoritmos import Algoritmos
 
 
 #color 
@@ -16,6 +16,7 @@ pygame.display.set_caption("Menu")
 pygame.mixer.music.load("Audio/fire.wav")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(2)
+#pygame.mixer.music.stop()
 
 
 BG = pygame.image.load("assets/Background.png").convert()
@@ -37,7 +38,9 @@ def play():
 
 
         PLAY_TEXT = get_font(45).render("window", True, "White")
-        #self.juego_activado = False
+        #window() #llamar funcion
+        Algoritmos()
+
         
 
         PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
@@ -95,8 +98,8 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        MENU_TEXT = get_font(100).render("MAIN MENU", True, "#b68f40")
-        MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
+        MENU_TEXT = get_font(100).render("MAIN MENU", True, "#FFFFFF")
+        MENU_RECT = MENU_TEXT.get_rect(center=(590, 100))
 
         PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
