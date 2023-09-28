@@ -23,10 +23,6 @@ def informada():
     BG = pygame.image.load("assets/Informada.png").convert()
     x=0
 
-
-
-
-
     def get_font(size): # Returns Press-Start-2P in the desired size
         return pygame.font.Font("assets/ANDALAS.ttf", size)
 
@@ -36,13 +32,9 @@ def informada():
 
             SCREEN.fill("black")
 
-
-
             PLAY_TEXT = get_font(45).render("window", True, "White")
             #window() #llamar funcion
-            window()
-
-            
+            window() 
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -103,11 +95,11 @@ def informada():
             MENU_TEXT = get_font(100).render("ALGORITMO INFORMADO", True, "#FFFFFF")
             MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-            AVARA = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
+            AVARA = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 250), 
                                 text_input="AVARA", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-            A = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
+            A = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 400), 
                                 text_input="A*", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-            QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550), 
+            QUIT_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 550), 
                                 text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)

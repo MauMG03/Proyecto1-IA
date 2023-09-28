@@ -106,11 +106,11 @@ def Algoritmos():
             MENU_TEXT = get_font(100).render("ALGORITMOS", True, "#FFFFFF")
             MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-            NOINFORMADA = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
+            NOINFORMADA = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 250), 
                                 text_input="noInformada", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-            INFORMADA = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
+            INFORMADA = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 400), 
                                 text_input="Informada", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-            QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550), 
+            QUIT_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 550), 
                                 text_input="QUIT", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)

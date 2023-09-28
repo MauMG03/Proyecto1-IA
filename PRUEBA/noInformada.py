@@ -24,10 +24,6 @@ def noInformada():
     BG = pygame.image.load("assets/noInformada.png").convert()
     x=0
 
-
-
-
-
     def get_font(size): # Returns Press-Start-2P in the desired size
         return pygame.font.Font("assets/sewer.ttf", size)
 
@@ -37,14 +33,9 @@ def noInformada():
 
             SCREEN.fill("black")
 
-
-
             PLAY_TEXT = get_font(45).render("window", True, "White")
             window() #llamar funcion
             
-
-            
-
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
 
@@ -73,7 +64,6 @@ def noInformada():
 
             SCREEN.fill("white")
         
-
             OPTIONS_TEXT = get_font(45).render("window", True, "Black")
             window() #llamar funcion
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
@@ -102,13 +92,8 @@ def noInformada():
 
             SCREEN.fill("black")
 
-
-
             PLAY_TEXT = get_font(45).render("window", True, "White")
             window() #llamar funcion
-            
-
-            
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -141,15 +126,14 @@ def noInformada():
             MENU_TEXT = get_font(70).render("ALGORITMO NO INFORMADO", True, "#FFFFFF")
             MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-            PROFUNDIDAD = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
+            PROFUNDIDAD = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 250), 
                                 text_input="PROFUNDIDAD", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-            AMPLITUD = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
+            AMPLITUD = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 400), 
                                 text_input="AMPLITUD", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-            COSTOUNIFORME = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550), 
+            COSTOUNIFORME = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 550), 
                                 text_input="COSTO", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)
-            
 
             for button in [PROFUNDIDAD, AMPLITUD, COSTOUNIFORME]:
                 button.changeColor(MENU_MOUSE_POS)
