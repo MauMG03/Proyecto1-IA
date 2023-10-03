@@ -42,6 +42,26 @@ class Nodo:
     ##      2 = abajo
     ##      3 = izquierda
     def posiblesMovimientos(self):
+
+        ##Función direccionContrario
+        ##Arroja la dirección contrario de un operador
+        def direccionContraria(direccion1, direccion2):
+            if ((direccion1 == 0 and direccion2 == 2) or (direccion1 == 2 and direccion2 == 0)):
+                return True
+            elif ((direccion1 == 1 and direccion2 == 3) or (direccion1 == 3 and direccion2 == 1)):
+                return True
+            
+            return False
+            
+        ##Función cambióEstado
+        ##Arroja si los estados de los dos nodos son diferentes o no
+        def cambioEstado(estado1, estado2):
+            #Si el bombero obtuvo una cubeta o si la cantidad de agua cambió
+            if ((estado1.cubeta != estado2.cubeta) or (estado1.agua != estado2.agua)):
+                return True
+            
+            return False
+
         #Guardamos posicion en x
         y = copy.deepcopy(self.estado.posicion[0])
         #Guardamos posicion en y
@@ -52,29 +72,56 @@ class Nodo:
 
         #0 = Arriba, 1 = Derecha, 2 = Abajo, 3 = Izquierda
         #Si se trata de una frontera, se trabajará como si fuera una pared
-        try:
+        if (y > 0):
             mapa_alrededor.append(self.estado.mapa[y-1][x])
-        except:
+        else:
             mapa_alrededor.append(1)
-        try:
+
+        if (x < 9):
             mapa_alrededor.append(self.estado.mapa[y][x+1])
-        except:
+        else:
             mapa_alrededor.append(1)
-        try:
+
+        if (y < 9):
             mapa_alrededor.append(self.estado.mapa[y+1][x])
-        except:
+        else:
             mapa_alrededor.append(1)
-        try:
+
+        if (x > 0):
             mapa_alrededor.append(self.estado.mapa[y][x-1])
-        except:
+        else:
             mapa_alrededor.append(1)
+
+        # try:
+        #     mapa_alrededor.append(self.estado.mapa[y-1][x])
+        # except:
+        #     mapa_alrededor.append(1)
+        # try:
+        #     mapa_alrededor.append(self.estado.mapa[y][x+1])
+        # except:
+        #     mapa_alrededor.append(1)
+        # try:
+        #     mapa_alrededor.append(self.estado.mapa[y+1][x])
+        # except:
+        #     mapa_alrededor.append(1)
+        # try:
+        #     mapa_alrededor.append(self.estado.mapa[y][x-1])
+        # except:
+        #     mapa_alrededor.append(1)
         
         direccion = 0
         movimientos = []
         for posicion in mapa_alrededor:
-            # Si la posicion es una pared o si es un fuego y no tiene agua
+            # Si la posicion es una pared o si es un fuego y no tiene agua 
             if (posicion != 1 and not (posicion == 2 and self.estado.agua == 0)):
-                movimientos.append(direccion)
+                #Si el operador es para devolverse. 
+                if (direccionContraria(self.operador, direccion)):
+                    #Si el estado cambió, añada la dirección, sino, no
+                    if (cambioEstado(self.padre.estado, self.estado)):
+                        movimientos.append(direccion)
+                #Ya que no se está devolviendo, añada la dirección por defecto
+                else:
+                    movimientos.append(direccion)
             
             #Seguir con la siguiente dirección
             direccion += 1
@@ -183,31 +230,31 @@ def amplitud():
 
     # Definimos el mundo
     #(Mundo de prueba para comprobar que funciona bien)
+    # mundo = [
+    # [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    # [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+    # [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    # [2, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    # [5, 3, 6, 1, 0, 0, 0, 1, 0, 1],
+    # [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+    # [2, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    # [1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+    # [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+    # [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
+    # ]
+    #(Mundo del proyecto)
     mundo = [
     [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
     [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-    [2, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [5, 3, 6, 1, 0, 0, 0, 1, 0, 1],
+    [0, 1, 0, 2, 0, 0, 0, 0, 0, 1],
+    [0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
+    [5, 0, 0, 6, 4, 0, 0, 1, 0, 1],
     [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    [2, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+    [3, 0, 0, 0, 2, 0, 0, 1, 0, 1],
+    [0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
     [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
     [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
     ]
-    #(Mundo del proyecto)
-    #mundo = [
-    #[0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    #[0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-    #[0, 1, 0, 2, 0, 0, 0, 0, 0, 1],
-    #[0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
-    #[5, 0, 0, 6, 4, 0, 0, 1, 0, 1],
-    #[0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    #[3, 0, 0, 0, 2, 0, 0, 1, 0, 1],
-    #[0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-    #[0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
-    #[0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
-    #]
 
     #Definimos la cola
     queue = []
@@ -234,6 +281,13 @@ def amplitud():
             print("Costo del nodo: " + str(nodo.costo))
             print("El algoritmo de Amplitud ha terminado :D")
             print(f"El tiempo total en el código paralelizado es: {end-start}")
+            print("Aquí esta la ruta completa:")
+
+            while (nodo.estado != None):
+                print("Costo: " + str(nodo.costo))
+                print(nodo.estado.mapa)
+                nodo = nodo.padre
+
             return True
         #Expandimos nodo_raíz
         direcciones = nodo.posiblesMovimientos()
