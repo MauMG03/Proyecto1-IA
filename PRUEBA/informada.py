@@ -7,7 +7,6 @@ def informada():
     #color 
     red = (255,0,0)
 
-
     pygame.init()
     W,H = 1280, 720
     SCREEN = pygame.display.set_mode((W,H))
@@ -33,7 +32,6 @@ def informada():
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            #window() #llamar funcion
             window() 
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
@@ -63,7 +61,6 @@ def informada():
             OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
             SCREEN.fill("white")
-        
 
             OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
             window()
@@ -104,11 +101,9 @@ def informada():
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)
             
-
             for button in [AVARA, A, QUIT_BUTTON]:
                 button.changeColor(MENU_MOUSE_POS)
                 button.update(SCREEN)
-
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

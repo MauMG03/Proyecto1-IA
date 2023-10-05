@@ -1,20 +1,9 @@
-import pygame
-def window():
+import pygame, time
+def window(informacion = None, recorrido = None):
 
     pygame.init()
 
-    INIT_STATE = [
-    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-    [0, 1, 0, 2, 0, 0, 0, 0, 0, 1],
-    [0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
-    [5, 0, 0, 6, 4, 0, 0, 1, 0, 1],
-    [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    [3, 0, 0, 0, 2, 0, 0, 1, 0, 1],
-    [0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
-    [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
-    ]
+    init_state = []
 
     #colors
     BLACK = (0, 0, 0)
@@ -75,12 +64,30 @@ def window():
                 pygame.quit()
                 exit()
 
-        screen.fill(WHITE)
-
-        #---draw here---
-        print_rects(INIT_STATE)
-        draw_grid()
+        if (recorrido is not None):
+            while(recorrido):
+                print("Jeje")
+                init_state = recorrido[0]
+                recorrido.pop(0)
+                print_rects(init_state)
+                draw_grid()
+                pygame.display.flip()
+                time.sleep(0.5)
+        else:
+            init_state = [
+            [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+            [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+            [0, 1, 0, 2, 0, 0, 0, 0, 0, 1],
+            [0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
+            [5, 0, 0, 6, 4, 0, 0, 1, 0, 1],
+            [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+            [3, 0, 0, 0, 2, 0, 0, 1, 0, 1],
+            [0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+            [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+            [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
+            ]
+            print_rects(init_state)
+            draw_grid()
         
-
         #---end draw---
         pygame.display.flip()

@@ -280,15 +280,43 @@ def amplitud():
             print("Profundidad del nodo: " + str(nodo.profundidad))
             print("Costo del nodo: " + str(nodo.costo))
             print("El algoritmo de Amplitud ha terminado :D")
-            print(f"El tiempo total en el código paralelizado es: {end-start}")
-            print("Aquí esta la ruta completa:")
+            print(f"El tiempo total en el código es: {end-start}")
 
-            while (nodo.estado != None):
-                print("Costo: " + str(nodo.costo))
-                print(nodo.estado.mapa)
+            # Esto es para ver la ruta del padre por consola
+            # print("Aquí esta la ruta completa:")
+            # while (nodo is not None):
+            #     print("Costo: " + str(nodo.costo))
+            #     print(nodo.estado.mapa)
+            #     nodo = nodo.padre
+
+            #Guardar el recorrido hecho
+            recorrido = []
+            while (nodo is not None):
+                #Debido a la estructura del código, si el bombero se encuentra en una
+                #Cubeta o hidrante, este no se encuentra en el mapa.
+                #Para mostrar el recorrido, modificaremos el mapa a guardar en 'recorrido'
+                mapa = copy.deepcopy(nodo.estado.mapa)
+                estaBombero = False
+                for fila in mapa:
+                    if (5 in fila):
+                        estaBombero = True
+                
+                #Si no se encuentra el bombero
+                if not estaBombero:
+                    #Tomar la posicion del bombero del estado del nodo
+                    posicionBombero = nodo.estado.posicion
+                    #Asignarla en el mapa
+                    mapa[posicionBombero[0]][posicionBombero[1]] = 5
+
+                recorrido.append(mapa)
                 nodo = nodo.padre
 
-            return True
+            #Debido a que el recorrido se guardó al reves, aquí se voltea por así decirlo
+            recorrido = recorrido[::-1]
+            
+            informacion = [copy.deepcopy(nodo), recorrido]
+            return informacion
+
         #Expandimos nodo_raíz
         direcciones = nodo.posiblesMovimientos()
         for direccion in direcciones:
@@ -298,9 +326,6 @@ def amplitud():
             nuevo_nodo = Nodo(parametros[0], nodo, parametros[1], parametros[2], parametros[3])
             print("Mapa " + str(parametros[0].mapa))
             queue.append(nuevo_nodo)
-        
-
-amplitud()
 
         
 

@@ -1,7 +1,6 @@
 import pygame
 import sys
 
-
 pygame.init()
 ventana = pygame.display.set_mode((500, 400))
 pygame.display.set_caption('Reporte')

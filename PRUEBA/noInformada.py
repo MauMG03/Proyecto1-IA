@@ -1,13 +1,12 @@
 import pygame, sys, random
 from button import Button
 from window import window
-
+from amplitud import amplitud as amp
 
 def noInformada():
 
     #color 
     red = (255,0,0)
-
 
     pygame.init()
     W,H = 1280, 720
@@ -65,16 +64,13 @@ def noInformada():
             SCREEN.fill("white")
         
             OPTIONS_TEXT = get_font(45).render("window", True, "Black")
-            window() #llamar funcion
+
+            print("Jeje")
+            informacion = amp()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        # OPTIONS_BACK = Button(image=None, pos=(640, 460), 
-                            # text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
-            window() #llamar funcion
-
-            #OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
-        # OPTIONS_BACK.update(SCREEN)
+            window(informacion[0], informacion[1]) #llamar funcion
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -148,8 +144,7 @@ def noInformada():
                     if AMPLITUD.checkForInput(MENU_MOUSE_POS):
                         amplitud()
                     if COSTOUNIFORME.checkForInput(MENU_MOUSE_POS):
-                        costo()
-                    
+                        costo() 
 
             pygame.display.update()
 

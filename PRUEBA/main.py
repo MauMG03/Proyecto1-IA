@@ -2,10 +2,8 @@ import pygame, sys, random
 from button import Button
 from algoritmos import Algoritmos
 
-
 #color 
 red = (255,0,0)
-
 
 pygame.init()
 W,H = 1280, 720
@@ -22,10 +20,6 @@ pygame.mixer.music.set_volume(2)
 BG = pygame.image.load("assets/Background.png").convert()
 x=0
 
-
-
-
-
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
@@ -35,13 +29,8 @@ def play():
 
         SCREEN.fill("black")
 
-
-
         PLAY_TEXT = get_font(45).render("window", True, "White")
-        #window() #llamar funcion
         Algoritmos()
-
-        
 
         PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -110,7 +99,6 @@ def main_menu():
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
         
-
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
