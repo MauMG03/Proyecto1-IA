@@ -8,7 +8,6 @@ def Algoritmos():
     #color 
     red = (255,0,0)
 
-
     pygame.init()
     W,H = 1280, 720
     SCREEN = pygame.display.set_mode((W,H))
@@ -24,11 +23,6 @@ def Algoritmos():
     BG = pygame.image.load("assets/algoritmos.png").convert()
     x=0
 
-
-
-
-
-
     def get_font(size): # Returns Press-Start-2P in the desired size
         return pygame.font.Font("assets/Potential Bold.ttf", size)
 
@@ -38,14 +32,8 @@ def Algoritmos():
 
             SCREEN.fill("black")
 
-
-
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            #window() #llamar funcion
-            #algoritmos()
             noInformada()
-
-            
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -74,7 +62,6 @@ def Algoritmos():
             OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
             SCREEN.fill("white")
-        
 
             OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
             informada()
@@ -114,7 +101,6 @@ def Algoritmos():
                                 text_input="QUIT", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)
-            
 
             for button in [NOINFORMADA, INFORMADA, QUIT_BUTTON]:
                 button.changeColor(MENU_MOUSE_POS)
