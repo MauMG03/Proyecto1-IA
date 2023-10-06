@@ -1,4 +1,6 @@
-import pygame, time
+import pygame, time, copy
+from reporte import reporte
+
 def window(informacion = None, recorrido = None):
 
     pygame.init()
@@ -66,13 +68,29 @@ def window(informacion = None, recorrido = None):
 
         if (recorrido is not None):
             while(recorrido):
-                print("Jeje")
+                #Toma el estado en cabeza de recorrido
                 init_state = recorrido[0]
+                #Elimina el estado en cabeza de recorrido
                 recorrido.pop(0)
+                #Dibuja el estado
                 print_rects(init_state)
                 draw_grid()
                 pygame.display.flip()
+                #Espera unos segundos para dibujar el siguiente estado del bombero
                 time.sleep(0.5)
+
+                #Si se trata del último estado, entrar aquí para pasar con el reporte
+                if (len(recorrido) == 1):
+                    init_state = recorrido[0]
+                    recorrido.pop(0)
+                    print_rects(init_state)
+                    draw_grid()
+                    pygame.display.flip()
+                    time.sleep(3)
+                    #Despliegue del reporte
+                    reporte(informacion)
+
+        #En caso de que no haya un recorrido, dibujar el estado inicial
         else:
             init_state = [
             [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],

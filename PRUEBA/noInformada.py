@@ -65,7 +65,6 @@ def noInformada():
         
             OPTIONS_TEXT = get_font(45).render("window", True, "Black")
 
-            print("Jeje")
             informacion = amp()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
