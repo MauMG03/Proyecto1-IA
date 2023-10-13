@@ -1,6 +1,6 @@
-import pygame, sys, random
+import pygame, sys
 from button import Button
-from algoritmos import Algoritmos
+from menuAlgoritmos import menuAlgoritmos
 
 #color 
 red = (255,0,0)
@@ -11,9 +11,9 @@ SCREEN = pygame.display.set_mode((W,H))
 pygame.display.set_caption("Menu")
 
 #music
-pygame.mixer.music.load("Audio/fire.wav")
+pygame.mixer.music.load("audio/fire.wav")
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(2)
+pygame.mixer.music.set_volume(1)
 #pygame.mixer.music.stop()
 
 
@@ -30,7 +30,7 @@ def play():
         SCREEN.fill("black")
 
         PLAY_TEXT = get_font(45).render("window", True, "White")
-        Algoritmos()
+        menuAlgoritmos()
 
         PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -50,7 +50,7 @@ def play():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
-                    main_menu()
+                    menuPrincipal()
 
         pygame.display.update()
     
@@ -77,11 +77,11 @@ def options():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
-                    main_menu()
+                    menuPrincipal()
 
         pygame.display.update()
 
-def main_menu():
+def menuPrincipal():
     while True:
         SCREEN.blit(BG, (0, 0))
 
@@ -118,4 +118,4 @@ def main_menu():
 
         pygame.display.update()
 
-main_menu()
+menuPrincipal()

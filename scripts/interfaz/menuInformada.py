@@ -1,8 +1,8 @@
-import pygame, sys, random
+import pygame, sys
 from button import Button
-from window import window
+from animacion import animacion
 
-def informada():
+def menuInformada():
 
     #color 
     red = (255,0,0)
@@ -13,9 +13,9 @@ def informada():
     pygame.display.set_caption("Algoritmos informados")
 
     #music
-    pygame.mixer.music.load("Audio/fire.wav")
+    pygame.mixer.music.load("audio/fire.wav")
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(2)
+    pygame.mixer.music.set_volume(1)
     #pygame.mixer.music.stop()
 
 
@@ -32,7 +32,7 @@ def informada():
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            window() 
+            animacion() 
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -63,7 +63,7 @@ def informada():
             SCREEN.fill("white")
 
             OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
-            window()
+            animacion()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 

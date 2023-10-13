@@ -1,6 +1,13 @@
 import pygame
 import sys
 
+##Función reporte
+##Argumentos:
+##    informacion: Diccionario que contiene:
+##    diccionario: {
+##       "nodo": Objeto de clase Nodo
+##       "tiempo": Int del tiempo que se demoró el algoritmo
+##       "nodos_expandidos": Int con la cantidad de nodos_expandidos}
 def reporte(informacion):
     #Se definen valores RGB
     WHITE = (255, 255, 255)

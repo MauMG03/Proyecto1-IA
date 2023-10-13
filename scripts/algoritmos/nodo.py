@@ -36,7 +36,7 @@ class Nodo:
     ##Argumentos:
     ##    self: Instancia Nodo
     ##Retorna:
-    ##    movimientos: Array de posibles movimientos
+    ##    movimientos: Array de posibles movimientos []
     ##      0 = arriba
     ##      1 = derecha
     ##      2 = abajo
@@ -90,36 +90,20 @@ class Nodo:
         if (x > 0):
             mapa_alrededor.append(self.estado.mapa[y][x-1])
         else:
-            mapa_alrededor.append(1)
-
-        # try:
-        #     mapa_alrededor.append(self.estado.mapa[y-1][x])
-        # except:
-        #     mapa_alrededor.append(1)
-        # try:
-        #     mapa_alrededor.append(self.estado.mapa[y][x+1])
-        # except:
-        #     mapa_alrededor.append(1)
-        # try:
-        #     mapa_alrededor.append(self.estado.mapa[y+1][x])
-        # except:
-        #     mapa_alrededor.append(1)
-        # try:
-        #     mapa_alrededor.append(self.estado.mapa[y][x-1])
-        # except:
-        #     mapa_alrededor.append(1)
+            mapa_alrededor.append(1) 
         
         direccion = 0
         movimientos = []
         for posicion in mapa_alrededor:
-            # Si la posicion es una pared o si es un fuego y no tiene agua 
+            # Si la posicion no es una pared o si es un fuego y no tiene agua 
             if (posicion != 1 and not (posicion == 2 and self.estado.agua == 0)):
-                #Si el operador es para devolverse. 
+                #Si el operador es para devolverse, analizar si cambió el estado:
                 if (direccionContraria(self.operador, direccion)):
                     #Si el estado cambió, añada la dirección, sino, no
                     if (cambioEstado(self.padre.estado, self.estado)):
                         movimientos.append(direccion)
-                #Ya que no se está devolviendo, añada la dirección por defecto
+
+                #Si el operador no se devuelve, añada la dirección por defecto
                 else:
                     movimientos.append(direccion)
             
@@ -137,7 +121,7 @@ class Nodo:
     ##      2 = abajo
     ##      3 = izquierda
     ##Retorna:
-    ##    Array con: [nuevo_estado, operador, profunidad, costo]
+    ##    nuevo_estado = Objeto de clase Estado con las variables actualizadas.
     def mover(self, direccion):
         # Definicion de costos
         costo_movimiento = 1
@@ -195,16 +179,11 @@ class Nodo:
                 nuevo_estado.cubeta = 1
         elif (objeto == 4): #Si pasó por una cubeta de 2L
             if (self.estado.cubeta == 0): #Si no tiene una cubeta
-                nuevo_estado.cubeta = 2
+                nuevo_estado.cubeta = 2 
         elif (objeto == 6 and self.estado.cubeta > 0 and self.estado.agua == 0): #Si pasó por un hidrante, tiene cubeta, y no tiene agua
             nuevo_estado.agua = self.estado.cubeta
 
-        #Sumar profundidad y costo
-        profundidad = self.profundidad + 1
-        costo = self.costo + costo_movimiento
-        operador = direccion
-
-        return [nuevo_estado, operador, profundidad, costo]
+        return nuevo_estado
 
     ##Función esMeta
     ##Argumentos:

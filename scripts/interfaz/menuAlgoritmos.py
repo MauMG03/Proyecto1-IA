@@ -1,10 +1,10 @@
-import pygame, sys, random
+import pygame, sys
 from button import Button
-from noInformada import noInformada
-from informada import informada
+from menuNoInformada import menuNoInformada
+from menuInformada import menuInformada
 
 
-def Algoritmos():
+def menuAlgoritmos():
     #color 
     red = (255,0,0)
 
@@ -14,16 +14,14 @@ def Algoritmos():
     pygame.display.set_caption("Algoritmos")
 
     #music
-    pygame.mixer.music.load("Audio/fire.wav")
+    pygame.mixer.music.load("audio/fire.wav")
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(2)
-    #pygame.mixer.music.stop()
-
+    pygame.mixer.music.set_volume(1)
 
     BG = pygame.image.load("assets/algoritmos.png").convert()
     x=0
 
-    def get_font(size): # Returns Press-Start-2P in the desired size
+    def get_font(size): 
         return pygame.font.Font("assets/Potential Bold.ttf", size)
 
     def play():
@@ -33,7 +31,7 @@ def Algoritmos():
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            noInformada()
+            menuNoInformada()
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -48,8 +46,6 @@ def Algoritmos():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                    SCREEN.blit(BG,(x,0))
-                    x -= 1
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
@@ -64,7 +60,7 @@ def Algoritmos():
             SCREEN.fill("white")
 
             OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
-            informada()
+            menuInformada()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 

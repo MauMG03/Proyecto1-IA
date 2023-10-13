@@ -1,10 +1,13 @@
-import pygame, sys, random
+import pygame, sys, os
 from button import Button
-from window import window
-from amplitud import amplitud as amp
+from animacion import animacion
 
-def noInformada():
+#Adding the partent directory of scripts to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from algoritmos.amplitud import amplitud
+
+def menuNoInformada():
     #color 
     red = (255,0,0)
 
@@ -14,11 +17,9 @@ def noInformada():
     pygame.display.set_caption("Algoritmo No Informado")
 
     #music
-    pygame.mixer.music.load("Audio/fire.wav")
+    pygame.mixer.music.load("audio/fire.wav")
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(2)
-    #pygame.mixer.music.stop()
-
+    pygame.mixer.music.set_volume(1)
 
     BG = pygame.image.load("assets/noInformada.png").convert()
     x=0
@@ -26,14 +27,15 @@ def noInformada():
     def get_font(size): # Returns Press-Start-2P in the desired size
         return pygame.font.Font("assets/sewer.ttf", size)
 
-    def profundidad():
+    def opcionProfundidad():
         while True:
             PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            window() #llamar funcion
+            pygame.mixer.music.stop()
+            animacion() #llamar funcion
             
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -44,12 +46,13 @@ def noInformada():
             PLAY_BACK.changeColor(PLAY_MOUSE_POS)
             PLAY_BACK.update(SCREEN)
 
+            pygame.mixer.music.stop()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    pygame.mixer.music.stop()
                     pygame.quit()
                     sys.exit()
-                    SCREEN.blit(BG,(x,0))
-                    x -= 1
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
@@ -57,7 +60,7 @@ def noInformada():
 
             pygame.display.update()
         
-    def amplitud():
+    def opcionAmplitud():
         while True:
             OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
@@ -65,11 +68,12 @@ def noInformada():
         
             OPTIONS_TEXT = get_font(45).render("window", True, "Black")
 
-            informacion = amp()
+            informacion = amplitud()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-            window(informacion[0], informacion[1]) #llamar funcion
+            pygame.mixer.music.stop()
+            animacion(informacion[0], informacion[1]) #llamar funcion
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -81,14 +85,15 @@ def noInformada():
 
             pygame.display.update()
 
-    def costo():
+    def opcionCosto():
         while True:
             PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            window() #llamar funcion
+            pygame.mixer.music.stop()
+            animacion() #llamar funcion
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -103,8 +108,6 @@ def noInformada():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                    SCREEN.blit(BG,(x,0))
-                    x -= 1
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
@@ -139,11 +142,11 @@ def noInformada():
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if PROFUNDIDAD.checkForInput(MENU_MOUSE_POS):
-                        profundidad()
+                        opcionProfundidad()
                     if AMPLITUD.checkForInput(MENU_MOUSE_POS):
-                        amplitud()
+                        opcionAmplitud()
                     if COSTOUNIFORME.checkForInput(MENU_MOUSE_POS):
-                        costo() 
+                        opcionCosto() 
 
             pygame.display.update()
 

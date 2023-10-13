@@ -1,7 +1,15 @@
-import pygame, time, copy
+import pygame, time
 from reporte import reporte
 
-def window(informacion = None, recorrido = None):
+##Función animacion
+##Argumentos:
+##    informacion: Diccionario que contiene: {
+##       "nodo": Objeto de clase Nodo
+##       "tiempo": Int del tiempo que se demoró el algoritmo
+##       "nodos_expandidos": Int con la cantidad de nodos_expandidos
+##     }
+##     recorrido: Array de Arrays: Array de mapas del recorrido del bombero
+def animacion(informacion = None, recorrido = None):
 
     pygame.init()
 

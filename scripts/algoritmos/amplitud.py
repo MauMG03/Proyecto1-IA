@@ -1,5 +1,5 @@
-from nodo import *
 import time, copy
+from .nodo import *
     
 
 ##Función amplitud
@@ -9,33 +9,13 @@ import time, copy
 ##    ?
 def amplitud():
 
-    # Definimos el mundo
-    #(Mundo de prueba para comprobar que funciona bien)
-    # mundo = [
-    # [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    # [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-    # [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-    # [2, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    # [5, 3, 6, 1, 0, 0, 0, 1, 0, 1],
-    # [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    # [2, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    # [1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-    # [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
-    # [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
-    # ]
-    #(Mundo del proyecto)
-    mundo = [
-    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-    [0, 1, 0, 2, 0, 0, 0, 0, 0, 1],
-    [0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
-    [5, 0, 0, 6, 4, 0, 0, 1, 0, 1],
-    [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    [3, 0, 0, 0, 2, 0, 0, 1, 0, 1],
-    [0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
-    [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
-    ]
+    #Se lee el mundo de "mundo.txt"
+    with open("scripts/algoritmos/mundo.txt", "r") as file:
+        #Leer el contenido del archivo
+        content = file.read()
+
+    #Se usa eval para parsear el contenido a una variable de python 
+    mundo = eval(content)
 
     #Definimos la cola
     queue = []
@@ -43,8 +23,14 @@ def amplitud():
     #Definimos la variable que almacenará la cantidad de nodos expandidos
     nodos_expandidos = 1
 
+    #Se busca y guarda la posición del bombero
+    for y, fila in enumerate(mundo):
+        for x, elemento in enumerate(fila):
+            if elemento == 5:
+                posicionBombero = [y, x]
+
     #Creamos estado y nodos raíces
-    estado_raiz = Estado(mundo, [4, 0], 0, 0)
+    estado_raiz = Estado(mundo, posicionBombero, 0, 0)
     nodo_raiz = Nodo(estado_raiz, None, None, 0, 0)
 
     #Añadimos nodo_raiz a la cola
@@ -65,25 +51,13 @@ def amplitud():
             end = time.time()
             tiempo_final = end-start
 
-            #print("Profundidad del nodo: " + str(nodo.profundidad))
-            #print("Costo del nodo: " + str(nodo.costo))
-            #print("El algoritmo de Amplitud ha terminado :D")
-            #print(f"El tiempo total en el código es: {end-start}")
-
-            # Esto es para ver la ruta del padre por consola
-            # print("Aquí esta la ruta completa:")
-            # while (nodo is not None):
-            #     print("Costo: " + str(nodo.costo))
-            #     print(nodo.estado.mapa)
-            #     nodo = nodo.padre
-
             #Guardar el recorrido hecho
             recorrido = []
             nodoFinal = copy.deepcopy(nodo)
             while (nodo is not None):
                 #Debido a la estructura del código, si el bombero se encuentra en una
                 #Cubeta o hidrante, este no se encuentra en el mapa.
-                #Para mostrar el recorrido, modificaremos el mapa a guardar en 'recorrido'
+                #Para mostrar el recorrido, se modifica el mapa a guardar en 'recorrido'
                 mapa = copy.deepcopy(nodo.estado.mapa)
                 estaBombero = False
                 for fila in mapa:
@@ -112,12 +86,24 @@ def amplitud():
             informacion = [informacion, recorrido]
             return informacion
 
-        #Expandimos nodo_raíz
+        #Se expande el nodo raíz
         direcciones = nodo.posiblesMovimientos()
         for direccion in direcciones:
             nodos_expandidos += 1
-            parametros = nodo.mover(direccion)
-            nuevo_nodo = Nodo(parametros[0], nodo, parametros[1], parametros[2], parametros[3])
+            estado = nodo.mover(direccion)
+
+            #Se calcula el costo del movimiento
+            #Definición de costo
+            costo_movimiento = 1
+            #Sumar la cantidad de agua que lleva
+            costo_movimiento += nodo.estado.agua
+            #Se calcula el nuevo costo
+            costo = costo_movimiento + nodo.costo
+
+            #Se calcula la nueva profundidad
+            profundidad = nodo.profundidad + 1
+
+            nuevo_nodo = Nodo(estado, nodo, direccion, profundidad, costo)
             queue.append(nuevo_nodo)
 
         
