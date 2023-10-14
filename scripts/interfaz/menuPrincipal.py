@@ -45,8 +45,6 @@ def play():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                SCREEN.blit(BG,(x,0))
-                x -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):

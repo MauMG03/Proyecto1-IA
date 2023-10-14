@@ -1,4 +1,4 @@
-import time, copy
+import time
 from .nodo import *
     
 ##Función amplitud
@@ -56,12 +56,12 @@ def amplitud():
 
             #Guardar el recorrido hecho
             recorrido = []
-            nodoFinal = copy.deepcopy(nodo)
+            nodoFinal = nodo
             while (nodo is not None):
                 #Debido a la estructura del código, si el bombero se encuentra en una
                 #Cubeta o hidrante, este no se encuentra en el mapa.
                 #Para mostrar el recorrido, se modifica el mapa a guardar en 'recorrido'
-                mapa = copy.deepcopy(nodo.estado.mapa)
+                mapa = nodo.estado.mapa
                 estaBombero = False
                 for fila in mapa:
                     if (5 in fila):
@@ -81,7 +81,7 @@ def amplitud():
             recorrido = recorrido[::-1]
             
             informacion = {
-                "nodo": copy.deepcopy(nodoFinal),
+                "nodo": nodoFinal,
                 "tiempo": tiempo_final,
                 "nodos_expandidos": nodos_expandidos,
                 "recorrido": recorrido

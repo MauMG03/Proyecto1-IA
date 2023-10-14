@@ -1,6 +1,9 @@
-import pygame, sys
+import pygame, sys, os
 from button import Button
 from animacion import animacion
+
+#Adding the partent directory of scripts to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 def menuInformada():
 

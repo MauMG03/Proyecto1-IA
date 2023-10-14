@@ -6,6 +6,9 @@ from animacion import animacion
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from algoritmos.amplitud import amplitud
+from algoritmos.costo import costo
+from algoritmos.profundidad import profundidad
+
 
 def menuNoInformada():
     #color 
@@ -45,8 +48,12 @@ def menuNoInformada():
 
             PLAY_BACK.changeColor(PLAY_MOUSE_POS)
             PLAY_BACK.update(SCREEN)
-
             pygame.mixer.music.stop()
+
+            #Se llama a la función de profundidad
+            informacion = profundidad()
+            animacion(informacion)
+
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -74,7 +81,7 @@ def menuNoInformada():
 
             #Se llama a la funcion de amplitud
             informacion = amplitud()
-            animacion(informacion) #llamar funcion
+            animacion(informacion) 
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -89,7 +96,6 @@ def menuNoInformada():
     def opcionCosto():
         while True:
             PLAY_MOUSE_POS = pygame.mouse.get_pos()
-
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
@@ -104,6 +110,11 @@ def menuNoInformada():
 
             PLAY_BACK.changeColor(PLAY_MOUSE_POS)
             PLAY_BACK.update(SCREEN)
+            pygame.mixer.music.stop()
+
+            #Se llama a la funcion de costo
+            informacion = costo()
+            animacion(informacion) 
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
