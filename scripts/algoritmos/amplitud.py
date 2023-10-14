@@ -1,12 +1,16 @@
 import time, copy
 from .nodo import *
     
-
 ##Función amplitud
 ##Argumentos:
 ##    nodo: Instancia Nodo
 ##Retorna:
-##    ?
+##    diccionario informacion que contiente: {
+##      nodo: Objeto de clase Nodo
+##      tiempo: Int que contiene el tiempo del algoritmo
+##      nodos_expandidos: Int que contiene cantidad de nodos expandidos
+##      recorrido: Array de arrays. Array de mapas que contienen el recorrido del bombero
+##      }
 def amplitud():
 
     #Se lee el mundo de "mundo.txt"
@@ -39,7 +43,6 @@ def amplitud():
     #Empezamos a tomar el tiempo inicial
     start = time.time()
     while True:
-        #time.sleep(0.5)
         #Significa que falló
         if len(queue) == 0:
             return False
@@ -80,10 +83,10 @@ def amplitud():
             informacion = {
                 "nodo": copy.deepcopy(nodoFinal),
                 "tiempo": tiempo_final,
-                "nodos_expandidos": nodos_expandidos
+                "nodos_expandidos": nodos_expandidos,
+                "recorrido": recorrido
             }
 
-            informacion = [informacion, recorrido]
             return informacion
 
         #Se expande el nodo raíz

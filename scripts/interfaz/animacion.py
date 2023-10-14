@@ -7,12 +7,14 @@ from reporte import reporte
 ##       "nodo": Objeto de clase Nodo
 ##       "tiempo": Int del tiempo que se demoró el algoritmo
 ##       "nodos_expandidos": Int con la cantidad de nodos_expandidos
+##       "recorrido": Array de arrays. Array de mapas que contienen el recorrido del bombero
 ##     }
-##     recorrido: Array de Arrays: Array de mapas del recorrido del bombero
-def animacion(informacion = None, recorrido = None):
+
+def animacion(informacion = None):
 
     pygame.init()
 
+    #Estado inicial
     init_state = []
 
     #colors
@@ -24,11 +26,20 @@ def animacion(informacion = None, recorrido = None):
     GREY = (96,96,96)
     ORANGE = (250,145,54)
 
+    #fuentes
     font = pygame.font.Font(None, 32)
 
+    #dimensiones
     weight = 600
     height = 600
     screen = pygame.display.set_mode((weight, height))
+
+    #Se extrae el recorrido del bombero
+    try:
+        recorrido = informacion["recorrido"]
+    except:
+        recorrido = None
+
 
 
     def draw_grid():

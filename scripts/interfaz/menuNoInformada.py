@@ -68,12 +68,13 @@ def menuNoInformada():
         
             OPTIONS_TEXT = get_font(45).render("window", True, "Black")
 
-            informacion = amplitud()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
-
             pygame.mixer.music.stop()
-            animacion(informacion[0], informacion[1]) #llamar funcion
+
+            #Se llama a la funcion de amplitud
+            informacion = amplitud()
+            animacion(informacion) #llamar funcion
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

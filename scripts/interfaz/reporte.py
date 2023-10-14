@@ -7,7 +7,9 @@ import sys
 ##    diccionario: {
 ##       "nodo": Objeto de clase Nodo
 ##       "tiempo": Int del tiempo que se demoró el algoritmo
-##       "nodos_expandidos": Int con la cantidad de nodos_expandidos}
+##       "nodos_expandidos": Int con la cantidad de nodos_expandidos
+##       "recorrido": Array de arrays. Array de mapas que contienen el recorrido realizado del bombero
+##  }
 def reporte(informacion):
     #Se definen valores RGB
     WHITE = (255, 255, 255)
