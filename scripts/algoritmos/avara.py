@@ -1,7 +1,7 @@
 import time
 from .nodo import *
     
-##Función profundidad
+##Función avara
 ##Argumentos:
 ##    nodo: Instancia Nodo
 ##Retorna:
@@ -12,5 +12,5 @@ from .nodo import *
 ##      recorrido: Array de arrays. Array de mapas que contienen el recorrido del bombero
 ##      }
 
-def profundidad():
+def avara():
   return None

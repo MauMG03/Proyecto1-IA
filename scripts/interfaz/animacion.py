@@ -40,8 +40,6 @@ def animacion(informacion = None):
     except:
         recorrido = None
 
-
-
     def draw_grid():
         # spacing between each line
         spacing = 60

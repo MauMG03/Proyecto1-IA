@@ -1,7 +1,7 @@
 import time
 from .nodo import *
     
-##Función amplitud
+##Función costo
 ##Argumentos:
 ##    nodo: Instancia Nodo
 ##Retorna:

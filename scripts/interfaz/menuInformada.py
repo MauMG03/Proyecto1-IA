@@ -5,10 +5,10 @@ from animacion import animacion
 #Adding the partent directory of scripts to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-def menuInformada():
+from algoritmos.avara import avara
+from algoritmos.aEstrella import aEstrella
 
-    #color 
-    red = (255,0,0)
+def menuInformada():
 
     pygame.init()
     W,H = 1280, 720
@@ -19,23 +19,19 @@ def menuInformada():
     pygame.mixer.music.load("audio/fire.wav")
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(1)
-    #pygame.mixer.music.stop()
-
 
     BG = pygame.image.load("assets/Informada.png").convert()
-    x=0
 
     def get_font(size): # Returns Press-Start-2P in the desired size
         return pygame.font.Font("assets/ANDALAS.ttf", size)
 
-    def avara():
+    def opcionAvara():
         while True:
             PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            animacion() 
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -45,13 +41,16 @@ def menuInformada():
 
             PLAY_BACK.changeColor(PLAY_MOUSE_POS)
             PLAY_BACK.update(SCREEN)
+            pygame.mixer.music.stop()
+
+            #Se llama a la función de avara
+            informacion = avara()
+            animacion(informacion)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                    SCREEN.blit(BG,(x,0))
-                    x -= 1
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
@@ -59,14 +58,13 @@ def menuInformada():
 
             pygame.display.update()
         
-    def a():
+    def opcionAEstrella():
         while True:
             OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
             SCREEN.fill("white")
 
             OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
-            animacion()
             OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
@@ -75,6 +73,11 @@ def menuInformada():
 
             OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
             OPTIONS_BACK.update(SCREEN)
+            pygame.mixer.music.stop()
+
+            #Se llama a la función de avara
+            informacion = aEstrella()
+            animacion(informacion)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -114,9 +117,9 @@ def menuInformada():
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if AVARA.checkForInput(MENU_MOUSE_POS):
-                        avara()
+                        opcionAvara()
                     if A.checkForInput(MENU_MOUSE_POS):
-                        a()
+                        opcionAEstrella()
                     if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
                         pygame.quit()
                         sys.exit()

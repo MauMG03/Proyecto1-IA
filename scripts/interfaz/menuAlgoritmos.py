@@ -5,8 +5,6 @@ from menuInformada import menuInformada
 
 
 def menuAlgoritmos():
-    #color 
-    red = (255,0,0)
 
     pygame.init()
     W,H = 1280, 720

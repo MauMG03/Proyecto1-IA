@@ -11,9 +11,7 @@ from algoritmos.profundidad import profundidad
 
 
 def menuNoInformada():
-    #color 
-    red = (255,0,0)
-
+    
     pygame.init()
     W,H = 1280, 720
     SCREEN = pygame.display.set_mode((W,H))
@@ -25,7 +23,6 @@ def menuNoInformada():
     pygame.mixer.music.set_volume(1)
 
     BG = pygame.image.load("assets/noInformada.png").convert()
-    x=0
 
     def get_font(size): # Returns Press-Start-2P in the desired size
         return pygame.font.Font("assets/sewer.ttf", size)
@@ -37,8 +34,6 @@ def menuNoInformada():
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            pygame.mixer.music.stop()
-            animacion() #llamar funcion
             
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)
@@ -99,8 +94,6 @@ def menuNoInformada():
             SCREEN.fill("black")
 
             PLAY_TEXT = get_font(45).render("window", True, "White")
-            pygame.mixer.music.stop()
-            animacion() #llamar funcion
 
             PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
             SCREEN.blit(PLAY_TEXT, PLAY_RECT)

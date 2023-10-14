@@ -123,16 +123,16 @@ class Nodo:
     ##Retorna:
     ##    nuevo_estado = Objeto de clase Estado con las variables actualizadas.
     def mover(self, direccion):
-        # Definicion de costos
+        #Definicion de costos
         costo_movimiento = 1
-        # Sumar la cantidad de agua que lleva
+        #Sumar la cantidad de agua que lleva
         costo_movimiento += copy.deepcopy(self.estado.agua)
         #Hago una copia del estado
         nuevo_estado = copy.deepcopy(self.estado)
 
-        #Guardamos posicion en x
-        y = copy.deepcopy(self.estado.posicion[0])
         #Guardamos posicion en y
+        y = copy.deepcopy(self.estado.posicion[0])
+        #Guardamos posicion en x
         x = copy.deepcopy(self.estado.posicion[1])
 
         if (direccion == 0): # 0 es arriba
