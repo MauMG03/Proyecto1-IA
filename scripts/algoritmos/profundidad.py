@@ -13,4 +13,17 @@ from .nodo import *
 ##      }
 
 def profundidad():
-  return None
+    #Se lee el mundo de "mundo.txt"
+    with open("scripts/algoritmos/mundo.txt", "r") as file:
+        #Leer el contenido del archivo
+        content = file.read()
+
+    #Se usa eval para parsear el contenido a una variable de python 
+    mundo = eval(content)
+
+    #Se busca y guarda la posición del bombero
+    for y, fila in enumerate(mundo):
+        for x, elemento in enumerate(fila):
+            if elemento == 5:
+                posicionBombero = [y, x]
+
