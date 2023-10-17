@@ -16,6 +16,19 @@ class Estado:
         self.cubeta = cubeta
         self.agua = agua
 
+    def getMapa(self): 
+        return self
+    
+    def isEqualTo(self, state):
+        if (self.mapa == state.mapa and 
+            self.posicion == state.posicion and 
+            self.cubeta == state.cubeta and
+            self.agua == state.agua):
+            return True
+        else:
+            return False
+
+
 ##Clase Nodo
 ##Argumentos:
 ##    estado: Instancia de Estado del mapa
@@ -31,7 +44,17 @@ class Nodo:
         self.operador = operador
         self.profundidad = profundidad
         self.costo = costo
+
+    def getEstado(self):
+        return self.estado
     
+    def getPadre(self):
+        return self.padre
+
+    def isEqualTo(self, node):
+        return self.estado.isEqualTo(node.estado)
+
+
     ##Función posiblesMovimientos
     ##Argumentos:
     ##    self: Instancia Nodo
