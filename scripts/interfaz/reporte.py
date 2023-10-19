@@ -1,5 +1,4 @@
 import pygame
-import sys
 
 ##Función reporte
 ##Argumentos:
@@ -12,12 +11,15 @@ import sys
 ##  }
 def reporte(informacion):
     #Se definen valores RGB
-    WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
 
     #Se define el ancho y alto de la ventana
     ANCHO = 1280
     ALTO = 720
+
+    #Se inicializa el Background
+    SCREEN = pygame.display.set_mode((ANCHO, ALTO))
+    BG = pygame.image.load("assets/reporte.png").convert()
 
     #Separamos las variables de 'informacion'
     nodo = informacion["nodo"]
@@ -35,16 +37,16 @@ def reporte(informacion):
 
     #Crea una superficie sobre la cual el texto será renderizado
     #También se renderizan los datos a dar
-    titulo = fuente.render('Reporte', True, BLACK, WHITE)
-    costo = fuente2.render('Costo de la solución: ' + str(nodo.costo), True, BLACK, WHITE)
-    profundidad = fuente2.render('Profundidad del árbol: ' + str(nodo.profundidad), True, BLACK, WHITE)
-    tiempo = fuente2.render('Tiempo tomado: ' + str(round(tiempo, 6)) + ' segundos', True, BLACK, WHITE)
-    nodos_expandidos = fuente2.render('Nodos expandidos: ' + str(nodos_expandidos), True, BLACK, WHITE)
+    titulo = fuente.render('Reporte', True, BLACK)
+    costo = fuente2.render('Costo de la solución: ' + str(nodo.costo), True, BLACK)
+    profundidad = fuente2.render('Profundidad del árbol: ' + str(nodo.profundidad), True, BLACK)
+    tiempo = fuente2.render('Tiempo tomado: ' + str(round(tiempo, 6)) + ' segundos', True, BLACK)
+    nodos_expandidos = fuente2.render('Nodos expandidos: ' + str(nodos_expandidos), True, BLACK)
     titulo_ancho = titulo.get_width()
 
     while True:
         #Llenar la superficie de blanco
-        ventana.fill(WHITE)
+        SCREEN.blit(BG, (0, 0))
 
         #Diuja el texto
         ventana.blit(titulo, ((ANCHO - titulo_ancho) // 2, 50))
