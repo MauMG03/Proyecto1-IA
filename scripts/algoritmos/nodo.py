@@ -38,22 +38,16 @@ class Estado:
 ##    costo_ruta: El costo que lleva hasta el momento el nodo
 
 class Nodo:
-    def __init__(self, estado, padre, operador, profundidad, costo):
+    def __init__(self, estado, padre, operador, profundidad, costo, heuristica = None):
         self.estado = estado
         self.padre = padre
         self.operador = operador
         self.profundidad = profundidad
         self.costo = costo
-
-    def getEstado(self):
-        return self.estado
-    
-    def getPadre(self):
-        return self.padre
+        self.heuristica = heuristica
 
     def isEqualTo(self, node):
         return self.estado.isEqualTo(node.estado)
-
 
     ##Función posiblesMovimientos
     ##Argumentos:

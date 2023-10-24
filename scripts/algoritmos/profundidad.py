@@ -2,6 +2,12 @@ import time
 from .nodo import *
 from collections import deque
 
+##Función evitarCiclos
+##Argumentos:
+##    node: Instancia nodo
+##Retorna:
+##    Boolean: Retorna si el nodo ya se encuentra en la ruta de los
+##             nodos padres.
 def evitarCiclos(node):
     parent = node.padre
     while parent != None:
@@ -11,7 +17,7 @@ def evitarCiclos(node):
     return True
 
     
-##Función amplitud
+##Función profundidad
 ##Argumentos:
 ##    nodo: Instancia Nodo
 ##Retorna:
@@ -115,9 +121,8 @@ def profundidad():
 
             #Se calcula la nueva profundidad
             profundidad = nodo.profundidad + 1
-
+            
+            #Verifique no haya ciclos, funcion que vaya verificando ese estado o nodo
             nuevo_nodo = Nodo(estado, nodo, direccion, profundidad, costo)
             if (evitarCiclos(nuevo_nodo)):
                 pila.append(nuevo_nodo)
-
-            #verifique no haya ciclos, funcion que vaya verificando ese estado o nodo
