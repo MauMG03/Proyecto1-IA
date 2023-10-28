@@ -27,10 +27,10 @@ def evitarCiclos(node):
 ##      nodos_expandidos: Int que contiene cantidad de nodos expandidos
 ##      recorrido: Array de arrays. Array de mapas que contienen el recorrido del bombero
 ##      }
-def profundidad():
+def profundidad(file):
 
     #Se lee el mundo de "mundo.txt"
-    with open("scripts/algoritmos/mundo.txt", "r") as file:
+    with open(file, "r") as file:
         #Leer el contenido del archivo
         content = file.read()
 
