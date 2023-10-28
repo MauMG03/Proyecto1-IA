@@ -11,17 +11,17 @@ SCREEN = pygame.display.set_mode((W,H))
 pygame.display.set_caption("Menu")
 
 #music
-pygame.mixer.music.load("audio/fire.wav")
+pygame.mixer.music.load("../../audio/fire.wav")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(1)
 #pygame.mixer.music.stop()
 
 
-BG = pygame.image.load("assets/Background.png").convert()
+BG = pygame.image.load("../../assets/Background.png").convert()
 x=0
 
 def get_font(size): # Returns Press-Start-2P in the desired size
-    return pygame.font.Font("assets/font.ttf", size)
+    return pygame.font.Font("../../assets/font.ttf", size)
 
 def play():
     while True:
@@ -88,11 +88,11 @@ def menuPrincipal():
         MENU_TEXT = get_font(100).render("MAIN MENU", True, "#FFFFFF")
         MENU_RECT = MENU_TEXT.get_rect(center=(590, 100))
 
-        PLAY_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 250), 
+        PLAY_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 250), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 400), 
+        OPTIONS_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 400), 
                             text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 550), 
+        QUIT_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 550), 
                             text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)

@@ -94,7 +94,7 @@ def animacion(informacion = None):
                 draw_grid()
                 pygame.display.flip()
                 #Espera unos segundos para dibujar el siguiente estado del bombero
-                time.sleep(0.5)
+                time.sleep(0.25)
 
                 #Si se trata del último estado, entrar aquí para pasar con el reporte
                 if (len(recorrido) == 1):
@@ -106,23 +106,6 @@ def animacion(informacion = None):
                     time.sleep(3)
                     #Despliegue del reporte
                     reporte(informacion)
-
-        #En caso de que no haya un recorrido, dibujar el estado inicial
-        else:
-            init_state = [
-            [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-            [0, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-            [0, 1, 0, 2, 0, 0, 0, 0, 0, 1],
-            [0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
-            [5, 0, 0, 6, 4, 0, 0, 1, 0, 1],
-            [0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-            [3, 0, 0, 0, 2, 0, 0, 1, 0, 1],
-            [0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-            [0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
-            [0, 1, 0, 1, 1, 1, 0, 0, 0, 0]
-            ]
-            print_rects(init_state)
-            draw_grid()
         
         #---end draw---
         pygame.display.flip()

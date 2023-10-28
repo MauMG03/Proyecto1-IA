@@ -1,6 +1,8 @@
 import pygame, sys, os
+import tkinter as tk
 from button import Button
 from animacion import animacion
+from tkinter import filedialog, messagebox
 
 #Adding the partent directory of scripts to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -16,14 +18,14 @@ def menuInformada():
     pygame.display.set_caption("Algoritmos informados")
 
     #music
-    pygame.mixer.music.load("audio/fire.wav")
+    pygame.mixer.music.load("../../audio/fire.wav")
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(1)
 
-    BG = pygame.image.load("assets/Informada.png").convert()
+    BG = pygame.image.load("../../assets/Informada.png").convert()
 
     def get_font(size): # Returns Press-Start-2P in the desired size
-        return pygame.font.Font("assets/ANDALAS.ttf", size)
+        return pygame.font.Font("../../assets/ANDALAS.ttf", size)
 
     def opcionAvara():
         while True:
@@ -43,9 +45,18 @@ def menuInformada():
             PLAY_BACK.update(SCREEN)
             pygame.mixer.music.stop()
 
-            #Se llama a la función de avara
-            informacion = avara()
-            animacion(informacion)
+            #Se abre una ventana para seleccionar un archivo
+            file = filedialog.askopenfilenames(
+                title = "Seleccione el archivo del mundo",
+                filetypes=[("Text files", "*.txt")]
+            )
+
+            #Se llama a la función de avara si se selecciono un archivo
+            if file:
+                informacion = avara(file[0])
+                animacion(informacion)
+            else:
+                messagebox.showwarning("Error", "No se seleccionó ningún archivo")
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -75,9 +86,18 @@ def menuInformada():
             OPTIONS_BACK.update(SCREEN)
             pygame.mixer.music.stop()
 
-            #Se llama a la función de avara
-            informacion = aEstrella()
-            animacion(informacion)
+            #Se abre una ventana para seleccionar un archivo
+            file = filedialog.askopenfilenames(
+                title = "Seleccione el archivo del mundo",
+                filetypes=[("Text files", "*.txt")]
+            )
+
+            #Se llama a la función de aEstrella si se selecciono un archivo
+            if file:
+                informacion = aEstrella(file[0])
+                animacion(informacion)
+            else:
+                messagebox.showwarning("Error", "No se seleccionó ningún archivo")
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -98,11 +118,11 @@ def menuInformada():
             MENU_TEXT = get_font(100).render("ALGORITMO INFORMADO", True, "#FFFFFF")
             MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-            AVARA = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 250), 
+            AVARA = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 250), 
                                 text_input="AVARA", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-            A = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 400), 
+            A = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 400), 
                                 text_input="A*", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-            QUIT_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 550), 
+            QUIT_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 550), 
                                 text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)

@@ -19,7 +19,7 @@ def reporte(informacion):
 
     #Se inicializa el Background
     SCREEN = pygame.display.set_mode((ANCHO, ALTO))
-    BG = pygame.image.load("assets/reporte.png").convert()
+    BG = pygame.image.load("../../assets/reporte.png").convert()
 
     #Separamos las variables de 'informacion'
     nodo = informacion["nodo"]
@@ -32,8 +32,8 @@ def reporte(informacion):
     pygame.display.set_caption('Reporte')
 
     #Se declara una fuente
-    fuente = pygame.font.Font("assets/font.ttf", 72)
-    fuente2 = pygame.font.Font("assets/font.ttf", 36)
+    fuente = pygame.font.Font("../../assets/font.ttf", 72)
+    fuente2 = pygame.font.Font("../../assets/font.ttf", 36)
 
     #Crea una superficie sobre la cual el texto será renderizado
     #También se renderizan los datos a dar

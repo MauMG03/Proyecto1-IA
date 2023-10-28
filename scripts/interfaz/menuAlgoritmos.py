@@ -12,15 +12,15 @@ def menuAlgoritmos():
     pygame.display.set_caption("Algoritmos")
 
     #music
-    pygame.mixer.music.load("audio/fire.wav")
+    pygame.mixer.music.load("../../audio/fire.wav")
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(1)
 
-    BG = pygame.image.load("assets/algoritmos.png").convert()
+    BG = pygame.image.load("../../assets/algoritmos.png").convert()
     x=0
 
     def get_font(size): 
-        return pygame.font.Font("assets/Potential Bold.ttf", size)
+        return pygame.font.Font("../../assets/Potential Bold.ttf", size)
 
     def play():
         while True:
@@ -87,11 +87,11 @@ def menuAlgoritmos():
             MENU_TEXT = get_font(100).render("ALGORITMOS", True, "#FFFFFF")
             MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-            NOINFORMADA = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 250), 
+            NOINFORMADA = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 250), 
                                 text_input="noInformada", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-            INFORMADA = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 400), 
+            INFORMADA = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 400), 
                                 text_input="Informada", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-            QUIT_BUTTON = Button(image=pygame.image.load("assets/rect.png"), pos=(640, 550), 
+            QUIT_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 550), 
                                 text_input="QUIT", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
 
             SCREEN.blit(MENU_TEXT, MENU_RECT)
