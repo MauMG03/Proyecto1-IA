@@ -134,18 +134,23 @@ def aEstrella(file):
       if len(posicionFuegos) == 2:
         #Se calcula la distancia de manhattan entre el bombero y el fuego 1
         distanciaManhattan1 = abs(posicionFuegos[0][0] - estado.posicion[0]) + abs(posicionFuegos[0][1] - estado.posicion[1])
+        
         #Se calcula la distancia de manhattan entre el bombero y el fuego 2
         distanciaManhattan2 = abs(posicionFuegos[1][0] - estado.posicion[0]) + abs(posicionFuegos[1][1] - estado.posicion[1])
-        
-        #Se calcula la heuristica
-        heuristica = min(distanciaManhattan1, distanciaManhattan2)*(1 + len(posicionFuegos))
+
+        if(distanciaManhattan1 > distanciaManhattan2):
+          #El fuego en la posicion 1 esta mas cerca al bombero
+          distanciaManhattan2 = abs(posicionFuegos[0][0] - posicionFuegos[1][0]) + abs(posicionFuegos[0][1] - posicionFuegos[1][1])
+        else:
+          #El fuego en la posicion 2 esta mas cerca al bombero
+          distanciaManhattan1 = abs(posicionFuegos[1][0] - posicionFuegos[0][0]) + abs(posicionFuegos[1][1] - posicionFuegos[0][1])
 
       elif len(posicionFuegos) == 1:
         #Se calcula la distancia de manhattan entre el bombero y el fuego
         distanciaManhattan1 = abs(posicionFuegos[0][0] - estado.posicion[0]) + abs(posicionFuegos[0][1] - estado.posicion[1]) 
 
-        #Se calcula la heuristica
-        heuristica = distanciaManhattan1*(1 + len(posicionFuegos))
+      #Se calcula la heuristica
+      heuristica = (distanciaManhattan1 + distanciaManhattan2)*(1 + len(posicionFuegos))
 
       #Agregar los nodos obedeciendo a la cola de prioridad
       nuevo_nodo = Nodo(estado, nodo, direccion, profundidad, costo, heuristica)
