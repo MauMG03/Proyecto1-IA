@@ -53,28 +53,30 @@ def animacion(informacion = None):
             pygame.draw.line(screen, BLACK, (i, 0), (i, height))
 
     def print_rects(state):
+        cesped = pygame.image.load("../../assets/cesped.jpeg")
+        muro = pygame.image.load("../../assets/muro.jpeg")
+        robot = pygame.image.load("../../assets/robot.jpeg")
+        fuego = pygame.image.load("../../assets/fuego.png")
+        agua = pygame.image.load("../../assets/hidrante.png")
+        balde1 = pygame.image.load("../../assets/balde1L.png")
+        balde2 = pygame.image.load("../../assets/balde2L.png")
+
         for i in range(len(state)):
             for j in range(len(state[i])):
                 if state[i][j] == 1:
-                    pygame.draw.rect(screen, GREY, (j*60, i*60, 60, 60))
+                    screen.blit(muro,(j*60,i*60))
                 elif state[i][j] == 2:
-                    pygame.draw.rect(screen, ORANGE, (j*60, i*60, 60, 60))
+                    screen.blit(fuego,(j*60,i*60))
                 elif state[i][j] == 3:
-                    pygame.draw.rect(screen, RED, (j*60, i*60, 60, 60))
-                    text = font.render("1L",True,BLACK)
-                    screen.blit(text,(j*60+20,i*60+20))
+                    screen.blit(balde1,(j*60,i*60))
                 elif state[i][j] == 4:
-                    pygame.draw.rect(screen, RED, (j*60, i*60, 60, 60))
-                    text = font.render("2L",True,BLACK)
-                    screen.blit(text,(j*60+20,i*60+20))
+                    screen.blit(balde2,(j*60,i*60))
                 elif state[i][j] == 5:
-                    pygame.draw.rect(screen, GREEN, (j*60, i*60, 60, 60))
+                    screen.blit(robot,(j*60,i*60))
                 elif state[i][j] == 6:
-                    pygame.draw.rect(screen, BLUE, (j*60, i*60, 60, 60))
-                elif state[i][j] == 7:
-                    pygame.draw.rect(screen, WHITE, (j*60, i*60, 60, 60))
+                    screen.blit(agua,(j*60,i*60))
                 else:
-                    pygame.draw.rect(screen, WHITE, (j*60, i*60, 60, 60))
+                    screen.blit(cesped,(j*60,i*60))
 
 
     while True:
