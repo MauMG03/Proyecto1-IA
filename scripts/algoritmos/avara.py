@@ -1,6 +1,21 @@
 import time
 import heapq
+from queue import PriorityQueue
 from .nodo import *
+
+##Función evitarCiclos
+##Argumentos:
+##    node: Instancia nodo
+##Retorna:
+##    Boolean: Retorna si el nodo no se encuentra en la ruta de los
+##             nodos padres.
+def evitarCiclos(node):
+    parent = node.padre
+    while parent != None:
+        if(node.isEqualTo(parent)):
+            return False
+        parent = parent.padre
+    return True
     
 ##Función avara
 ##Argumentos:
@@ -21,7 +36,7 @@ def avara(file):
   #Se usa eval para parsear el contenido a una variable de python 
   mundo = eval(content)
 
-    #Definimos la cola con prioridad
+  #Definimos la cola con prioridad
   cola = []
 
   #Definimos la variable que almacenará la cantidad de nodos expandidos
@@ -150,8 +165,9 @@ def avara(file):
         distanciaManhattan1 = abs(posicionFuegos[0][0] - estado.posicion[0]) + abs(posicionFuegos[0][1] - estado.posicion[1]) 
 
       #Se calcula la heuristica
-      heuristica = (distanciaManhattan1 + distanciaManhattan2)*(1 + len(posicionFuegos))
+      heuristica = (distanciaManhattan1 + distanciaManhattan2)
 
       #Agregar los nodos obedeciendo a la cola de prioridad
       nuevo_nodo = Nodo(estado, nodo, direccion, profundidad, costo, heuristica)
-      heapq.heappush(cola, nuevo_nodo)
+      if(evitarCiclos(nuevo_nodo)):
+        heapq.heappush(cola, nuevo_nodo)

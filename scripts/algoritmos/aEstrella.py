@@ -150,7 +150,7 @@ def aEstrella(file):
         distanciaManhattan1 = abs(posicionFuegos[0][0] - estado.posicion[0]) + abs(posicionFuegos[0][1] - estado.posicion[1]) 
 
       #Se calcula la heuristica
-      heuristica = (distanciaManhattan1 + distanciaManhattan2)*(1 + len(posicionFuegos))
+      heuristica = (distanciaManhattan1 + distanciaManhattan2)
 
       #Agregar los nodos obedeciendo a la cola de prioridad
       nuevo_nodo = Nodo(estado, nodo, direccion, profundidad, costo, heuristica)
