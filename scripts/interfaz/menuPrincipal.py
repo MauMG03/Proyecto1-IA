@@ -59,12 +59,25 @@ def options():
         SCREEN.fill("white")
       
 
-        OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
+        OPTIONS_TEXT = get_font(64).render("MEMBERS ", True, "Black")
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(650, 100))
         SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        OPTIONS_BACK = Button(image=None, pos=(640, 460), 
-                            text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
+        MEMBER1_TEXT = get_font(28).render("Mauricio Muñoz Gutierrez - 2123687", True, "Black")
+        MEMBER1_RECT = MEMBER1_TEXT.get_rect(center=(650, 250))
+        SCREEN.blit(MEMBER1_TEXT, MEMBER1_RECT)
+
+        MEMBER2_TEXT = get_font(28).render("Juleipssy Daianne Cely Archila - 2122036", True, "Black")
+        MEMBER2_RECT = MEMBER2_TEXT.get_rect(center=(650, 350))
+        SCREEN.blit(MEMBER2_TEXT, MEMBER2_RECT)
+
+        MEMBER3_TEXT = get_font(28).render("Sebastian Idrobo Avirama - 2122637", True, "Black")
+        MEMBER3_RECT = MEMBER1_TEXT.get_rect(center=(650, 450))
+        SCREEN.blit(MEMBER3_TEXT, MEMBER3_RECT)
+        
+
+        OPTIONS_BACK = Button(image=None, pos=(640, 660), 
+                            text_input="BACK", font=get_font(45), base_color="Black", hovering_color="Green")
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_BACK.update(SCREEN)
@@ -91,7 +104,7 @@ def menuPrincipal():
         PLAY_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 250), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
         OPTIONS_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 400), 
-                            text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                            text_input="MEMBERS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
         QUIT_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 550), 
                             text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
