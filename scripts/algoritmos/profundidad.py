@@ -6,7 +6,7 @@ from collections import deque
 ##Argumentos:
 ##    node: Instancia nodo
 ##Retorna:
-##    Boolean: Retorna si el nodo ya se encuentra en la ruta de los
+##    Boolean: Retorna si el nodo no se encuentra en la ruta de los
 ##             nodos padres.
 def evitarCiclos(node):
     parent = node.padre
