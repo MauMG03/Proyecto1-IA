@@ -1,6 +1,8 @@
 import pygame, sys
+import tkinter as tk
 from button import Button
 from menuAlgoritmos import menuAlgoritmos
+from tkinter import filedialog, messagebox
 
 #color 
 red = (255,0,0)
@@ -57,7 +59,6 @@ def options():
         OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
         SCREEN.fill("white")
-      
 
         OPTIONS_TEXT = get_font(64).render("MEMBERS ", True, "Black")
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(650, 100))
@@ -92,6 +93,87 @@ def options():
 
         pygame.display.update()
 
+def map():
+    file = filedialog.askopenfilenames(
+        title = "Seleccione el archivo del mundo",
+        filetypes=[("Text files", "*.txt")]
+    )
+
+    if file:
+        with open(file[0], "r") as file:
+            #Leer el contenido del archivo
+            content = file.read()
+
+        init_state = eval(content)
+
+        BLACK = (0,0,0)
+        weight = 600 + 321
+        height = 600 + 21
+        spacing = 60
+
+        def draw_grid(start_x, start_y):
+            for i in range(start_y, height, spacing):
+                pygame.draw.line(SCREEN, BLACK, (start_x, i), (weight, i))
+
+            for i in range(start_x, weight, spacing):
+                pygame.draw.line(SCREEN, BLACK, (i, start_y), (i, height))
+
+
+        def print_rects(state, start_x, start_y):
+            cesped = pygame.image.load("../../assets/cesped.jpeg")
+            muro = pygame.image.load("../../assets/muro.jpeg")
+            robot = pygame.image.load("../../assets/robot.jpeg")
+            fuego = pygame.image.load("../../assets/fuego.png")
+            agua = pygame.image.load("../../assets/hidrante.png")
+            balde1 = pygame.image.load("../../assets/balde1L.png")
+            balde2 = pygame.image.load("../../assets/balde2L.png")
+
+            for i in range(len(state)):
+                for j in range(len(state[i])):
+                    if state[i][j] == 1:
+                        SCREEN.blit(muro, (j*60+start_x, i*60+start_y))
+                    elif state[i][j] == 2:
+                        SCREEN.blit(fuego, (j*60+start_x, i*60+start_y))
+                    elif state[i][j] == 3:
+                        SCREEN.blit(balde1, (j*60+start_x, i*60+start_y))
+                    elif state[i][j] == 4:
+                        SCREEN.blit(balde2, (j*60+start_x, i*60+start_y))
+                    elif state[i][j] == 5:
+                        SCREEN.blit(robot, (j*60+start_x, i*60+start_y))
+                    elif state[i][j] == 6:
+                        SCREEN.blit(agua, (j*60+start_x, i*60+start_y))
+                    else:
+                        SCREEN.blit(cesped, (j*60+start_x, i*60+start_y))
+
+
+        while True:
+            #Draw white and take the position of the mouse
+            OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
+            SCREEN.blit(BG, (0, 0))
+
+            print_rects(init_state, 320, 20)
+            draw_grid(320,20)
+
+            OPTIONS_BACK = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 680), 
+                                text_input="BACK", font=get_font(45), base_color="Black", hovering_color="Green")
+            OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
+
+            OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
+            OPTIONS_BACK.update(SCREEN)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
+                        menuPrincipal()
+
+            pygame.display.flip()
+    else:
+        messagebox.showwarning("Error", "No se seleccionó ningún archivo")
+
+
 def menuPrincipal():
     while True:
         SCREEN.blit(BG, (0, 0))
@@ -105,12 +187,12 @@ def menuPrincipal():
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
         OPTIONS_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 400), 
                             text_input="MEMBERS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 550), 
-                            text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+        MENU_BUTTON = Button(image=pygame.image.load("../../assets/rect.png"), pos=(640, 550), 
+                            text_input="VIEW MAP", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
         
-        for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
+        for button in [PLAY_BUTTON, OPTIONS_BUTTON, MENU_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
         
@@ -123,9 +205,8 @@ def menuPrincipal():
                     play()
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     options()
-                if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    pygame.quit()
-                    sys.exit()
+                if MENU_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    map()
 
         pygame.display.update()
 
